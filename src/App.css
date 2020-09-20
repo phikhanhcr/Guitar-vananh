@@ -46,6 +46,9 @@ nav.active {
 ul li a:active {
   color: #f26522;
 }
+.cl-f26522 {
+  color: #f26522;
+}
 
 @media (min-width: 1200px) {
   .container {
@@ -124,7 +127,7 @@ main {
   top: -100px;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.829);
   flex-direction: column;
   justify-content: center;
   align-items: center;

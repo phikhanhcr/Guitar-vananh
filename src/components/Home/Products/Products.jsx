@@ -1,4 +1,4 @@
-import { Card } from '@material-ui/core';
+
 import React from 'react';
 import { Row } from 'reactstrap';
 import './Product.css'
@@ -20,9 +20,7 @@ function Products(props) {
         </div>
 
         <Row className="product-bwrap">
-          <Card >
-
-          </Card>
+        
           {
             [1, 2, 3, 4, 5, 6, 7, 8].map(ele => (
               <div className="each-product col-lg-3 col-md-6 col-sm-6 p-15 " style={{ marginBottom: 65 }}>

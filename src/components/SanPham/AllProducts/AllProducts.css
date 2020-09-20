@@ -1,0 +1,40 @@
+.wrapper-catalogs {
+  padding: 20px 15px 30px 45px;
+  height: auto;
+  transition: all 0.3s;
+}
+.wrapper-catalogs ul li {
+  margin-left: 10px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.panel {
+  transition: all 0.3s;
+}
+.panel-expand {
+  display: none;
+  transition: all 0.3s;
+}
+.panel-expand.active-catalogs {
+  display: block;
+}
+.product-wrap {
+  margin-top: 50px;
+}
+.product-item {
+  margin-bottom: 70px;
+}
+.product-wrap .product-item .product-over {
+  background-color: #f6f6f6;
+}
+.option-product {
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
+select {
+  vertical-align: middle;
+ padding: 2px 15px;
+  outline: 0;
+}
