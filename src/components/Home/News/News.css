@@ -1,0 +1,9 @@
+.space-around {
+  justify-content: space-around;
+}
+.news {
+  padding: 70px 0 125px 0;
+}
+.news-info {
+  width: 250px;
+}
