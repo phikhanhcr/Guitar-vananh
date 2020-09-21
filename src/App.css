@@ -138,3 +138,10 @@ main {
   width: 30px;
   height: 30px;
 }
+.shadow {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+}
+.footer ul {
+  display: flex;
+  flex-direction: column;
+}

@@ -6,7 +6,7 @@ function Banner(props) {
     <section className="banner">
       <div className="container">
         <div className="row">
-          <div className="col-lg-4 col-md-6 gutters-5 wow pl-15 pr-15 fadeInUp">
+          <div className="col-lg-4 col-md-6 pl-15 pr-15">
             <div className="banner-wrap bg-fff  d-flex align-items-center justify-content-between px-2 h-100">
                 <div className="banner-info">
                   <h2 className="text-uppercase black t1 s14 pb-3 banner-info-tit"> Guitar</h2>

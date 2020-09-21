@@ -1,23 +1,23 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faThLarge, faThList } from '@fortawesome/free-solid-svg-icons';
 
 function Option(props) {
   return (
-    <div className="row bg-f6f6f6 m-1 option-product d-flex justify-content-space-between align-items-center "> 
-      <div>
-        <FontAwesomeIcon icon={faPhone} className="mr-2" />
-        <FontAwesomeIcon icon={faPhone} className="mr-2" />
+    <div className="row bg-white shadow m-1 option-product d-flex justify-content-space-between align-items-center "> 
+      <div className="wrapper-svg p-15">
+        <FontAwesomeIcon  icon={faThList} className="mr-2" />
+        <FontAwesomeIcon icon={faThLarge} className="mr-2" />
       </div>
       <div>
         <select>
-          <option>Sắp xếp theo</option>
-          <option>Giá tăng dần</option>
-          <option>Giá giảm dần</option>
-          <option>Tên A-Z</option>
-          <option>Tên Z-A</option>
-          <option>Cũ nhất</option>
-          <option>Mới nhẩt</option>
+          <option value>Sắp xếp theo</option>
+          <option value="price-ascending">Giá tăng dần</option>
+          <option value="price-descending">Giá giảm dần</option>
+          <option value="title-ascending">Tên A-Z</option>
+          <option value="title-descending">Tên Z-A</option>
+          <option value="oldest">Cũ nhất</option>
+          <option value="newest">Mới nhẩt</option>
         </select>
       </div>
     </div>

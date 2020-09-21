@@ -3,9 +3,7 @@
   height: auto;
   transition: all 0.3s;
 }
-.wrapper-catalogs ul li {
-  margin-left: 10px;
-}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -30,11 +28,86 @@
 }
 .option-product {
   border: 1px solid #ccc;
+  padding: 17px;
+}
+.wrapper-svg {
   padding: 15px;
+  margin-right: 15px;
+}
+.wrapper-svg svg:hover {
+  color: #f26522;
+}
+.wrapper-svg svg {
+  margin-right: 30px !important;
 }
 
 select {
   vertical-align: middle;
- padding: 2px 15px;
+  padding: 2px 15px;
   outline: 0;
+}
+
+.wrapper-catalogs .accordion .card button {
+  color: #f26522;
+  text-decoration: none;
+}
+.wrapper-catalogs .accordion .card button:hover {
+  text-decoration: none;
+}
+.btn:focus {
+  box-shadow: none !important;
+}
+.wrapper-catalogs .card {
+  border: none !important;
+}
+.card-header {
+  margin-bottom: 0;
+  border: none !important;
+  background-color: white !important;
+}
+.wrapper-catalogs .card-body {
+  padding: 0.2rem 1.25rem !important;
+}
+.wrapper-catalogs ul {
+  margin-left: 15px;
+}
+.wrapper-catalogs ul li {
+  margin: 0 0 10px 10px;
+  line-height: 24px;
+}
+.wrapper-catalogs .btn {
+  padding: 0 !important;
+}
+.wrapper-catalogs ul li a {
+  font-size: 16px;
+  padding: 0 !important;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.wrapper-catalogs h2 button {
+  font-size: 18px !important;
+}
+.wrapper-title {
+  position: relative;
+  color: rgb(44, 42, 42);
+  padding-left: 1.25rem;
+}
+.wrapper-title h4 {
+  margin: 0 ;
+  padding-bottom: 20px;
+  font-weight: 400;
+}
+.wrapper-title::before {
+  content: "";
+  width: 2px;
+  height: 22px;
+  background: #f26522;
+  display: inline-block;
+  position: absolute;
+  top: 5px;
+  left: -15px;
+}
+
+.option-product {
+  margin-bottom: 20px;
 }
