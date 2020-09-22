@@ -111,3 +111,9 @@ select {
 .option-product {
   margin-bottom: 20px;
 }
+.pagination {
+  padding-bottom: 30px;
+}
+.pagination li a {
+  border: 1px solid rgb(223, 223, 223);
+}

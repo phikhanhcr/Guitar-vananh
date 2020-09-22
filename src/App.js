@@ -113,6 +113,9 @@ function App() {
             <Route path="/giao-hang">
 
             </Route>
+            <Route path="/acoustic">
+              <div>asdasdasd</div>
+            </Route>
           </Switch>
         </div>
       </Router>
