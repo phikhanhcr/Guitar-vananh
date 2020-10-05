@@ -9,6 +9,7 @@ import {
   Link
 } from "react-router-dom";
 import SanPham from './components/SanPham/SanPham';
+import ProductDetails from './components/SanPham/ProductDetails/ProductDetails';
 function App() {
   const [activeSearch, setActiveInput] = useState(false);
   var header;
@@ -95,7 +96,7 @@ function App() {
             <Route exact path="/gioi-thieu">
 
             </Route>
-            <Route exact path="/san-pham">
+            <Route  path="/san-pham">
               <SanPham />
             </Route>
             <Route path="/tin-tuc">
@@ -116,6 +117,8 @@ function App() {
             <Route path="/acoustic">
               <div>asdasdasd</div>
             </Route>
+            <Route exact path="/all-product/:group/:product" component={ProductDetails} />
+
           </Switch>
         </div>
       </Router>

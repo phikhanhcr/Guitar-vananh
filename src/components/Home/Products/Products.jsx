@@ -2,7 +2,7 @@
 import React from 'react';
 import { Row } from 'reactstrap';
 import './Product.css'
-function Products(props) {
+function Products({latestItem}) {
   return (
     <section className="product ">
       <div className="container">
@@ -22,22 +22,22 @@ function Products(props) {
         <Row className="product-bwrap">
         
           {
-            [1, 2, 3, 4, 5, 6, 7, 8].map(ele => (
+            latestItem.map(ele => (
               <div className="each-product col-lg-3 col-md-6 col-sm-6 p-15 " style={{ marginBottom: 65 }}>
                 <div className="product-item bg-white pb-15">
                   <div className="item-img d-flex justify-content-center">
-                    <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2FUntitled.png?v=1600496496998" alt="hi" />
+                    <img className="img-src" src={ele.img} alt="hi" />
                   </div>
                   <div className="item-info">
                     <h2 className="s15 bold">
-                      <a href="#" className="t1">
-                        KHÓA ĐÀN GUITAR ACOUSTIC ĐÚC ĐEN KA180
+                      <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1">
+                        {ele.name}
                       </a>
                     </h2>
-                    <h3 className="s20">300000</h3>
+                    <h3 className="s20">{ele.price}</h3>
                   </div>
                   <div className="product-over p-3 text-center">
-                    <a href="#" className="mr-3">
+                    <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="mr-3">
                       <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fexpand.png?v=1600500234753" alt="expand"/>
                     </a>
                     <a href="#">

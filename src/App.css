@@ -18,7 +18,10 @@ nav.active {
   padding: 10px;
   transition: all 0.3s;
 }
-
+.img-src {
+  height: auto;
+  width: 80%;
+}
 .header ul {
   list-style-type: none;
   margin-bottom: 0;
@@ -49,7 +52,9 @@ ul li a:active {
 .cl-f26522 {
   color: #f26522;
 }
-
+.cl-f26522-background {
+  background-color: #f26522;
+}
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
@@ -60,6 +65,19 @@ ul li a:active {
 }
 .s30 {
   font-size: 30px;
+}
+.s18 {
+  font-size: 18px;
+  font-weight: 500;
+}
+.border-bold {
+  border: 2px solid black; 
+}
+.w-170 {
+  width: 170px;
+}
+.w-80 {
+  width: 80px;
 }
 main {
   padding-top: 81px;
@@ -80,14 +98,22 @@ main {
 .text-uppercase {
   text-transform: uppercase;
 }
+.breadcrumb-tit {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
 .s14 {
   font-size: 14px;
+}
+.s36 {
+  font-size: 36px;
 }
 .s20 {
   font-size: 20px;
 }
 .bold {
   font-weight: 700;
+  line-height: 1.5;
 }
 .s15 {
   font-size: 15px;
@@ -109,6 +135,7 @@ main {
 }
 .link-ref {
   color: black;
+  text-decoration: none;
 }
 .link-ref:hover {
   color: #f26522;
@@ -144,4 +171,10 @@ main {
 .footer ul {
   display: flex;
   flex-direction: column;
+}
+.cl-white {
+  color : white;
+}
+.black-background { 
+  background-color: black;
 }

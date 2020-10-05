@@ -1,0 +1,64 @@
+.banner-page-wrap li::before {
+  font-weight: 900;
+  content: "\f054";
+  font: normal normal normal 16px/1 FontAwesome;
+}
+.banner-page {
+  padding-top: 120px;
+  margin-bottom: 70px;
+}
+.banner-page-wrap {
+  background: url("https://vananhaudio.com/public/images/about/about1.jpg");
+}
+.product-details {
+}
+.form-order input {
+  margin-bottom: 10px;
+}
+.form-order button {
+  width: 200px;
+  padding: 10px 10px;
+  margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 5px #aaa;
+  border: none !important;
+  transition: all 0.2s;
+}
+.form-order button:hover {
+  background: #fff;
+  border-radius: 0;
+  color: #f26522;
+  box-shadow: 0 4px 5px #aaa;
+  transform: translateY(5px);
+  border: 1px solid #f26522;
+}
+.item-info ul {
+  list-style-type: circle;
+  margin-bottom: 15px;
+}
+.border-f26522 {
+  border-bottom:1px solid #f26522;
+}
+.table-detail {
+  transition: all 0.3s;
+  display: none;
+}
+.table-detail.active {
+  display: block;
+}
+
+
+.hover-img-wrap {
+  width: 300px;
+  background-repeat: no-repeat;
+}
+
+.hover-img-wrap:hover img {
+  opacity: 0;
+}
+
+.hover-img-wrap img {
+  display: block;
+  width: 100%;
+  pointer-events: none;
+}
