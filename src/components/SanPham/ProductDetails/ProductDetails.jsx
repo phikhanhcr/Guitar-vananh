@@ -11,6 +11,7 @@ function ProductDetails({ match }) {
   const [item, setItem] = useState({})
   const [backgroundImages, setBackgroundImages] = useState(`url(${src})`)
   const [backgroundPosition, setBackgroundPosition] = useState('0% 0%')
+  const [groupInstrument, setGroupInstrument ] = useState('')
   const handleClickDetails = () => {
     setDisplayDetails(!displayDetails)
   }
@@ -22,18 +23,20 @@ function ProductDetails({ match }) {
 
   }
   useEffect(() => {
-    console.log(match.params)
     async function fetchData() {
       await fetch(`http://localhost:3000/api/all-product/${match.params.group}/${match.params.product}`)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          console.log(data[0].groupInstrument)
+          setGroupInstrument(data[0].groupInstrument.name)
           setItem(data[0])
+          console.log(data)
         }).catch(err => {
+          console.log(err)
         })
     }
     fetchData();
-  }, [])
+  }, [match.params])
 
   return (
     <main className="product-details">
@@ -44,7 +47,7 @@ function ProductDetails({ match }) {
             <ul className="pb-3">
               <li><a href="http://localhost:3001"> Trang Chủ </a></li>
               <li><a href="http://localhost:3001/san-pham"> Sản Phẩm</a></li>
-              <li><a href="http://localhost:3001/san-pham"> Đàn Guitar Acoustic</a></li>
+              <li><a href="http://localhost:3001/san-pham">{groupInstrument}</a></li>
               <li>{item.name}</li>
             </ul>
           </div>
@@ -248,11 +251,11 @@ function ProductDetails({ match }) {
                 <li>Giới thiệu mẫu đàn C400-2018</li>
                 <br />
                 <li>Giá: 4 triệu</li>
-                <br/>
+                <br />
 
                 <li>Đàn Guitar Clasic với tiêu chí dành cho người chơi chuyên sâu cổ điển</li>
-                <br/>
-                
+                <br />
+
                 <li>Âm thanh lên tròn trịa thì phím 1 đến phím 17</li>
                 <li> Nhờ có chất gỗ thùng đàn vừa có chất gỗ hồng đào (Mềm, và nhẹ, thanh mảnh) vừa có chất gỗ điệp (Nặng và ấm) là đặc trưng âm sắc và độ ngân của đàn C400</li>
                 <li>Nhà sản xuất: Công ty TNHH Văn Anh Audio</li>

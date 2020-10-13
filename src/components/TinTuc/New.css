@@ -1,0 +1,29 @@
+.blog-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 90%;
+}
+.item-blog-img {
+  width: 80%;
+  transition: all 0.2s;
+}
+.blog-info {
+  position: absolute;
+  background: rgba(255, 97, 4, 0.6);
+  padding: 15px;
+  top: calc(100% - 70px);
+  left: 0;
+  width: 100%;
+  transition: all 0.3s;
+}
+.blog-wrap:hover .blog-info{
+  top: 0;
+  height: 100%;
+}
+.blog-wrap:hover .item-blog-img{
+  transform: scale(1.2, 1.2);
+  transition: all 0.2s;
+}
+.blog-element {
+  margin-bottom: 30px;
+}
