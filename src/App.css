@@ -120,7 +120,9 @@ main {
 .justify-content-space-between {
   justify-content: space-between;
 }
-
+.justify-content-flex-end { 
+  justify-content: flex-end;
+}
 .banner-wrap {
   padding-top: 20px;
   padding-bottom: 30px;
@@ -220,4 +222,11 @@ main {
 }
 .wrapper-cart .d-flex img {
   margin-right: 12px;  
+}
+.normal-link {
+  color : rgb(0, 0, 0);
+  text-decoration: none;
+}
+.normal-link:hover {
+  text-decoration: none;
 }

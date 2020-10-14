@@ -1,90 +1,54 @@
-import React, { PureComponent } from 'react';
-import { Redirect } from 'react-router-dom'
+import React from 'react';
+import { useState } from 'react';
+import { Container } from 'reactstrap';
 import './Login.css'
-class Login extends PureComponent {
-  constructor(props) {
-    super(props);
-    const token = localStorage.getItem('token');
-    let loggedIn = true;
-    if (!token) {
-      loggedIn = false
-    }
-    this.state = {
-      username: '',
-      password: '',
-      loggedIn,
-      checkUser: false,
-      checkPass: false
-    }
+function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const onHandleChangeUser = e => {
+    setUsername(e.target.value)
   }
-
-  onChange = event => {
-
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-    console.log(event.target.value)
+  const onHandleChangePass = e => {
+    setPassword(e.target.value)
   }
-  
-
-  render() {
-    const { username, password, loggedIn, checkUser, checkPass } = this.state;
-    let classNameUser = 'alert alert-warning display';
-    let classNamePass = 'alert alert-warning display';
-    if (checkUser) {
-      classNameUser = 'alert alert-warning';
-    }
-    if (checkPass) {
-      classNamePass = 'alert alert-warning';
-    }
-    if (loggedIn) {
-      return <Redirect to="/" />
-    }
-    return (
-      <div className="Login">
-        <div className="wrapper-login">
-          <div className="child-login">
-            <h1>Instagram</h1>
-            <div className={classNameUser} role="alert">
-              Username doesn't exists !!!
-            </div>
-            <div className={classNamePass} role="alert">
-              Oop, Wrong Password !!!
-            </div>
-            <form>
+  const onHandleSubmit = e => {
+    e.preventDefault();
+  }
+  return (
+    <section className="login">
+      <Container className="d-flex justify-content-flex-end">
+        <div className="wrapper-login ">
+            <a href="/" className="normal-link"> Get Back Home Page</a>
+            <p className="s36 text-center">Đăng Nhập</p>
+            <form onSubmit={onHandleSubmit}>
               <input
                 type="text"
                 placeholder="Username"
-                name="username"
                 value={username}
-
-                onChange={this.onChange}
-                required />
+                name="username"
+                onChange={onHandleChangeUser}
+                required
+              />
               <input
                 type="password"
+                value={password}
                 placeholder="Password"
                 name="password"
-                value={password}
+                onChange={onHandleChangePass}
+                required
+              />
+              <button className="mt-15">Login</button>
+              <div className=" w-100 s14 d-flex justify-content-space-between">
+                <a href="#" className="normal-link">Forgot Password?</a>
+                <a href="#" className="normal-link">Login with SMS</a>
+              </div>
 
-                onChange={this.onChange}
-                required />
-              <button className="btn btn-primary">Log In</button>
             </form>
-            <p>Or</p>
-            <div>
-              <a href="#">
-                Forgot your password
-            </a>
-            </div>
-          </div>
-          <div className="sign-in">
-            <p>You don't have account </p>
-            <a href="#">Sign In</a>
-          </div>
+
         </div>
-      </div>
-    );
-  }
+      </Container>
+    </section>
+  );
 }
 
 export default Login;

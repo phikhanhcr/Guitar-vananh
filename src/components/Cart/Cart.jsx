@@ -40,7 +40,7 @@ function Cart(props) {
 
                     </td>
                     <td>
-                      <input type="number" />
+                      <input type="number" defaultValue="5" />
                     </td>
                     <td>5</td>
                     <td>50000000</td>

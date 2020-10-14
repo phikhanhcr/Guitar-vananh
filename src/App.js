@@ -116,6 +116,9 @@ function App() {
                 <li>
                   <Link to="/lien-he">Liên hệ</Link>
                 </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
               </div>
               <div className="d-flex right">
                 <li className="mr-3" onClick={() => setActiveInput(!activeSearch)}>
