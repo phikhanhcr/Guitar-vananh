@@ -10,24 +10,28 @@
   display: flex;
   justify-content: center;
 }
-
+.login p {
+  margin: 0;
+  
+}
 .login .wrapper form {
   display: flex;
   flex-direction: column;
 }
 .login .wrapper-login {
   margin-top: 21%;
-  background-color: rgba(248, 243, 243, 0);
-  
+  padding: 15px;
+  border-radius: 15px;
+  background-color: rgba(248, 243, 243, 0.4);
+  height: 370px;
 }
 .login .wrapper-login form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
 }
 .login .wrapper-login form input {
-  margin : 5px;
+  margin: 5px;
   width :  300px;
   height: 40px;
   padding-left: 20px;
