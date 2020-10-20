@@ -13,18 +13,51 @@ import ProductDetails from './components/SanPham/ProductDetails/ProductDetails';
 import New from './components/TinTuc/New';
 import Login from './components/Login/Login';
 import Cart from './components/Cart/Cart';
+import Axios from 'axios';
+import { UserConsume, UserProvider } from './ContextApi/UserContext';
+import Header from './components/Header/Header';
+
 function App() {
   const [activeSearch, setActiveInput] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
   const [searchItem, setSearchItem] = useState([]);
   const [allItems, setAllItems] = useState([]);
-  const [cartButton, setCartButton ] = useState(false);
+  const [cartButton, setCartButton] = useState(false);
+  const [userData, setUserData] = useState({
+    token: undefined,
+    user: undefined
+  })
 
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem('auth-token')
+      if (!token) {
+        token = "";
+        localStorage.setItem('auth-token', "");
+      }
+      const tokenRes = await Axios.post('http://localhost:3000/login/isValidToken', null, {
+        headers: { 'x-auth-token': token }
+      })
+      console.log(tokenRes)
+      if (tokenRes.data) {
+        const userRes = await Axios.get('http://localhost:3000/login', {
+          headers: { 'x-auth-token': token }
+        })
+        console.log(userRes)
+        setUserData({
+          token,
+          user: userRes.data
+        })
+
+      }
+    }
+    checkLoggedIn()
+  }, [])
   const handleClickCart = () => {
     setCartButton(!cartButton);
   }
   let classNameCart = 'home-cart';
-  if(cartButton) {
+  if (cartButton) {
     classNameCart = "home-cart active"
   } else {
     classNameCart = "home-cart"
@@ -42,6 +75,7 @@ function App() {
     }
     fetchData()
   }, [])
+
   var header;
   window.addEventListener('scroll', () => {
     header = document.getElementById('header')
@@ -50,15 +84,15 @@ function App() {
     } else {
       header.classList.remove('active')
     }
-
   })
-  let classNames = "search";
+
+  let classNamesInput = "search";
   let classNameSearchWrapper = "";
   if (activeSearch) {
-    classNames = "search active";
+    classNamesInput = "search active";
     classNameSearchWrapper = ""
   } else {
-    classNames = "search"
+    classNamesInput = "search"
     classNameSearchWrapper = "display-none"
   }
   // search
@@ -71,6 +105,7 @@ function App() {
     console.log(resultSearch)
     setSearchItem(resultSearch)
   }
+  //  search Item
   const onHandleChangeInput = (e) => {
     const inputValue = e.target.value
     if (inputValue !== "") {
@@ -79,136 +114,60 @@ function App() {
     } else {
       setSearchItem([])
     }
-
   }
+
 
   return (
     <div className="App">
       <Router>
+        <UserProvider value={{ userData, setUserData }}>
+          <div className="header w-100">
+            <Header 
+              onHandleChangeInput={onHandleChangeInput}
+              handleClickCart={handleClickCart}
+              setActiveInput={setActiveInput}
+              classNameSearchWrapper={classNameSearchWrapper}
+              classNameCart={classNameCart}
+              activeSearch={activeSearch}
+              searchItem={searchItem}
+              classNamesInput={classNamesInput}
+            />
 
-        <div className="header w-100">
-          <nav id="header">
-            <ul className="container wrapper-header d-flex">
-              <div>
-                <li>
-                  <Link to="/">
-                    <img className="logo" src="https://vananhaudio.com/upload/hinhanh/1522634515_logo.png" alt="home" />
-                  </Link>
-                </li>
-              </div>
-
-              <div className="s20">
-                <li >
-                  <Link to="/">Trang Chủ</Link>
-                </li>
-                <li>
-                  <Link to="/gioi-thieu">Giới thiệu</Link>
-                </li>
-                <li>
-                  <Link to="/san-pham">Sản phẩm</Link>
-                </li>
-                <li>
-                  <Link to="/tin-tuc">Tin tức</Link>
-                </li>
-                <li>
-                  <Link to="/dang-ly-hoc">Đăng ký học</Link>
-                </li>
-                <li>
-                  <Link to="/lien-he">Liên hệ</Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </div>
-              <div className="d-flex right">
-                <li className="mr-3" onClick={() => setActiveInput(!activeSearch)}>
-                  <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fsearch.png?v=1600474376428" alt="search" />
-                </li>
-                <li>
-                  <div className="cart">
-                    <img onClick={handleClickCart} src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fhand-bag.png?v=1600474259484" alt="cart" />
-                    <div className={classNameCart}>
-                      <h5 className="mb-3 text-center t1">Giỏ Hàng: </h5>
-                      <div className="wrapper-cart t1 mt-2">
-                        <div className="t1 d-flex justify-content-center algin-items-center">
-                          <img src="https://thegioidanviet.com/wp-content/uploads/2019/10/dan-guitar-acoustic-nghe-nhan-thuan-dt-03c-1.jpg" alt="img" />
-                          <div>
-                            <p>Guitar Dáng tròn</p>
-                            <p>SL 5 x 2.000.000</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="t1 mt-2 text-center">
-                        TỔNG <strong className="t1 ">8,000,000.00 đ</strong>
-                      </div>
-                      <div className="t1 text-center">
-                        <a href="/gio-hang" class="text-uppercase text-center btn">Xem giỏ hàng</a>
-                      </div>
-                    </div>
-                    
-                  </div>
-
-                </li>
-              </div>
-            </ul>
-            <section className={classNames}>
-              <div className="d-flex">
-                <form className="d-flex">
-                  <input type="text" className="pl-2 s14" onChange={onHandleChangeInput} placeholder="Nhập từ khóa tìm kiếm..." />
-                  <button className="ml-3 btn btn-light">
-                    <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fsearch.png?v=1600474376428" alt="search" />
-                  </button>
-                </form>
-              </div>
-              <div className={classNameSearchWrapper}>
-                {
-                  searchItem.length ? searchItem.slice(0, 8).map(ele => (
-                    <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1 wrapper-search p-2">
-                      <div className="p-1 d-flex justify-content-left align-items-center">
-                        <img alt="img" className="mr-2" src={ele.img} />
-                        <p className="p-0 m-0 s18">{ele.name}</p>
-                      </div>
-                    </a>
-                  )) : "No items match "
-                }
-              </div>
-            </section>
-          </nav>
-
-          {/* A <Switch> looks through its children <Route>s and
+            {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/gioi-thieu">
+            <Switch>
 
-            </Route>
-            <Route path="/san-pham">
-              <SanPham />
-            </Route>
-            <Route path="/tin-tuc">
-              <New />
-            </Route>
-            <Route path="/dang-ly-hoc">
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/gioi-thieu">
+              </Route>
+              <Route path="/san-pham">
+                <SanPham />
+              </Route>
+              <Route path="/tin-tuc">
+                <New />
+              </Route>
+              <Route path="/dang-ly-hoc">
 
-            </Route>
-            <Route path="/video">
+              </Route>
+              <Route path="/video">
 
-            </Route>
-            <Route path="/lien-he">
+              </Route>
+              <Route path="/lien-he">
 
-            </Route>
-            <Route path="/gio-hang">
+              </Route>
+              <Route path="/gio-hang">
                 <Cart />
-            </Route>
+              </Route>
 
-            <Route exact path="/all-product/:group/:product" component={ProductDetails} />
-            <Route path="/login">
-              <Login />
-            </Route>
-          </Switch>
-        </div>
+              <Route exact path="/all-product/:group/:product" component={ProductDetails} />
+              <Route path="/login">
+                <Login  />
+              </Route>
+            </Switch>
+          </div>
+        </UserProvider>
       </Router>
 
 
