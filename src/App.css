@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
 }
+p {
+  margin: 0 !important;
+  padding: 0 ;
+}
 .header nav {
   background-color: #f6f6f6;
   position: fixed;
@@ -21,7 +25,7 @@ nav.active {
   height: auto;
   width: 80%;
 }
-.header ul {
+.wrapper-header{
   list-style-type: none;
   margin-bottom: 0;
 }
@@ -94,6 +98,9 @@ main {
 .bg-white {
   background-color: white;
 }
+.bg-ddd {
+  background-color: #eee;
+}
 .text-uppercase {
   text-transform: uppercase;
 }
@@ -119,6 +126,9 @@ main {
 }
 .justify-content-space-between {
   justify-content: space-between;
+}
+.justify-content-space-around {
+  justify-content: space-around;
 }
 .justify-content-flex-end { 
   justify-content: flex-end;

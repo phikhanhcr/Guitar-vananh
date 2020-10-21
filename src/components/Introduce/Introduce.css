@@ -1,0 +1,15 @@
+.img-intro {
+  margin-right: 20px;
+}
+.partner h2 {
+  position: relative;
+  margin-bottom: 25px;
+}
+.partner h2::before {
+  content : "";
+  position: absolute;
+  background-color: orange;
+  width: 150px;
+  height: 2px;
+  top : 55px
+}               

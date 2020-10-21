@@ -1,14 +1,17 @@
 
+import { FormControlLabel, Radio, RadioGroup, TextField } from '@material-ui/core';
 import React from 'react';
 import { Container, Row } from 'reactstrap'
 import Footer from '../Home/Footer/Footer';
 import './Cart.css'
+import Payment from './Payment';
+import TableReceipt from './Table/TableReceipt';
 function Cart(props) {
   return (
-    <section className="cart">
-      <div className="banner-page">
+    <main className="cart">
+      <section className="banner-page">
         <Container>
-          <div className="banner-page-wrap d-flex flex-column  justify-content-center align-items-center">
+          <div className="banner-page-wrap d-flex flex-column w-100  justify-content-center align-items-center">
             <h1 className="s36 bold cl-f26522 text-uppercase text-center breadcrumb-tit ">Giỏ Hàng</h1>
             <ul className="pb-3">
               <li><a href="http://localhost:3001"> Trang Chủ </a></li>
@@ -16,47 +19,49 @@ function Cart(props) {
             </ul>
           </div>
         </Container>
-      </div>
+      </section>
       <div>
         <Container>
+          <TableReceipt />
+          <p className="info-book s20 bold text-center w-100 bg-ddd p-3">THÔNG TIN ĐẶT HÀNG</p>
           <Row>
-            <div className="col-lg-9 col-sm-12">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Total Money</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td className="d-flex img-table">
-                      <img src="https://nhaccuphutho.vn/wp-content/uploads/2020/05/Guitar-Acoustic-Yamaha-FS800.jpg" alt="img"/>
-                      <p>Dan Guitar Acoustic</p>
+            <form className="d-flex">
+              <div className="col-lg-4 col-md-6">
 
-                    </td>
-                    <td>
-                      <input type="number" defaultValue="5" />
-                    </td>
-                    <td>5</td>
-                    <td>50000000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="col-lg-3 col-sm-12">
+                <TextField id="standard-basic" label="Họ tên khách hàng" type="text" required />
+                <TextField id="standard-basic" label="Địa chỉ nhận hàng" type="text" required />
+                <TextField id="standard-basic" label="Điện thoại liên hệ" type="text" required />
+                <TextField id="standard-basic" label="Email" type="email" required />
+                <TextField className="mt-4" id="outlined-basic" label="Note: " variant="outlined" type="text" />
 
-            </div>
+              </div>
+              <div className="col-lg-4 col-md-6">
+                <Payment />
+              </div>
+              <div className="col-lg-4 col-md-6">
+                <div className='d-flex flex-column h-100 justify-content-space-around '>
+                  <div className="d-flex">
+                    <p className="bold mr-3">Tạm tính:</p>
+                    <span> 4,000,000 VNĐ</span>
+                  </div>
+
+                  <p>Phí giao hàng: Phí ship sẽ được tính tùy theo địa chỉ của khách hàng. (Nếu quý khách yêu cầu
+                  đặt theo COMBO thì nhắn vào phần ghi chú cho shop biết nhé) VNĐ</p>
+                  <div className="d-flex">
+                    <p className="bold mr-3">Tổng thanh toán:</p>
+                    <p>4,000,000 VNĐ</p>
+                  </div>
+
+                  <button className="btn btn-dark">Đặt Hàng</button>
+                </div>
+              </div>
+            </form>
           </Row>
-
         </Container>
+
       </div>
       <Footer />
-    </section>
+    </main>
   );
 }
 

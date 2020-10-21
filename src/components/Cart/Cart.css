@@ -1,8 +1,54 @@
-.img-table img{
-  height:  50px;
+.img-table img {
+  height: 50px;
   width: auto;
   margin-right: 5px;
 }
 .table td input {
   width: 60px;
+}
+.details-receipt {
+  border: 1px solid #ccc;
+
+}
+.details-receipt section {
+  flex-grow: 1;
+}
+.wrapper-details {
+  padding: 20px 0px 40px 15px;
+  height: 350px;
+}
+.details-receipt h3::before {
+  content: "";
+  margin: 20px ;
+  width: 2px;
+  height: 20px;
+  background: #f26522;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -5px;
+} 
+
+.details-receipt div div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rowTable {
+  margin-right: 0px !important;
+}
+.info-book{
+  margin-top: 25px !important;
+}
+.wrapper-bank img {
+  height: 45px;
+}
+.cart .default-extends-hide {
+  display : none;
+}
+.cart .default-extends {
+  display: block;
+}
+.wrapper-payment p {
+  transition: all 0.3s;
 }

@@ -16,6 +16,9 @@ import Cart from './components/Cart/Cart';
 import Axios from 'axios';
 import { UserConsume, UserProvider } from './ContextApi/UserContext';
 import Header from './components/Header/Header';
+import Introduce from './components/Introduce/Introduce';
+import Contact from './components/Contact/Contact';
+import Registration from './components/ResgisterStudent/Registration';
 
 function App() {
   const [activeSearch, setActiveInput] = useState(false);
@@ -141,6 +144,7 @@ function App() {
                 <Home />
               </Route>
               <Route exact path="/gioi-thieu">
+                <Introduce />
               </Route>
               <Route path="/san-pham">
                 <SanPham />
@@ -149,13 +153,13 @@ function App() {
                 <New />
               </Route>
               <Route path="/dang-ly-hoc">
-
+                <Registration />
               </Route>
               <Route path="/video">
 
               </Route>
               <Route path="/lien-he">
-
+                <Contact />
               </Route>
               <Route path="/gio-hang">
                 <Cart />
