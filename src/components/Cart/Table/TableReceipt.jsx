@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Row } from 'reactstrap';
+import { CartContext } from '../../../ContextApi/CartContext';
+import EachProductReceipt from './EachProduct';
 
 function TableReceipt(props) {
+  const { userCart, setUserCart } = useContext(CartContext)
+  console.log(userCart)
   return (
-    <Row className="rowTable"> 
+    <Row className="rowTable">
       <div className="col-lg-9 col-sm-12 ">
         <table className="table">
           <thead>
@@ -17,19 +21,11 @@ function TableReceipt(props) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td className="d-flex img-table">
-                <img src="https://nhaccuphutho.vn/wp-content/uploads/2020/05/Guitar-Acoustic-Yamaha-FS800.jpg" alt="img" />
-                <p>Dan Guitar Acoustic</p>
-              </td>
-              <td>
-                <input type="number" defaultValue="5" />
-              </td>
-              <td>1000000</td>
-              <td>50000000</td>
-              <td className="s20 t1 black">X</td>
-            </tr>
+            {
+              userCart.length && userCart.map(ele => (
+                <EachProductReceipt ele={ele}/>
+              ))
+            }
           </tbody>
         </table>
       </div>

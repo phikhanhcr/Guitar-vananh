@@ -99,7 +99,7 @@ function Header({
                           <img src="https://thegioidanviet.com/wp-content/uploads/2019/10/dan-guitar-acoustic-nghe-nhan-thuan-dt-03c-1.jpg" alt="img" />
                           <div>
                             <p className="s12">{ele.idProduct.name}</p>
-                            <p className="s12">SL {ele.amount} x {ele.idProduct.price}</p>
+                            <p className="s14">SL {ele.amount} x {ele.idProduct.price}</p>
                           </div>
                         </div>
                       ))) : <div>CHua co gi </div>

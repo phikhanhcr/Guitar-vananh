@@ -6,7 +6,11 @@ import Footer from '../Home/Footer/Footer';
 import './Cart.css'
 import BankAccount from './BankAccount';
 import TableReceipt from './Table/TableReceipt';
+import { CartContext } from '../../ContextApi/CartContext';
+import { useContext } from 'react';
+
 function Cart(props) {
+  const { userCart, setUserCart } = useContext(CartContext)
   return (
     <main className="cart">
       <section className="banner-page">
