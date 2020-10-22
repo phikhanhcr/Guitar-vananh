@@ -19,7 +19,7 @@ import Header from './components/Header/Header';
 import Introduce from './components/Introduce/Introduce';
 import Contact from './components/Contact/Contact';
 import Registration from './components/ResgisterStudent/Registration';
-
+import { CartProvider, CartConsume } from './ContextApi/CartContext'
 function App() {
   const [activeSearch, setActiveInput] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
@@ -30,6 +30,8 @@ function App() {
     token: undefined,
     user: undefined
   })
+  const [userCart, setUserCart] = useState([])
+  // get cat from api 
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -46,18 +48,27 @@ function App() {
         const userRes = await Axios.get('http://localhost:3000/login', {
           headers: { 'x-auth-token': token }
         })
-        console.log(userRes)
         setUserData({
           token,
           user: userRes.data
         })
-
+        if (userRes.data) {
+          const myCart = await Axios.get('http://localhost:3000/api/cart', {
+            headers: { 'x-auth-token': token }
+          })
+          setUserCart(myCart.data.cart)
+        }
       }
     }
     checkLoggedIn()
   }, [])
   const handleClickCart = () => {
     setCartButton(!cartButton);
+    setActiveInput(false)
+  }
+  const handleClickSearch = () => {
+    setActiveInput(!activeSearch)
+    setCartButton(!true);
   }
   let classNameCart = 'home-cart';
   if (cartButton) {
@@ -124,53 +135,56 @@ function App() {
     <div className="App">
       <Router>
         <UserProvider value={{ userData, setUserData }}>
-          <div className="header w-100">
-            <Header 
-              onHandleChangeInput={onHandleChangeInput}
-              handleClickCart={handleClickCart}
-              setActiveInput={setActiveInput}
-              classNameSearchWrapper={classNameSearchWrapper}
-              classNameCart={classNameCart}
-              activeSearch={activeSearch}
-              searchItem={searchItem}
-              classNamesInput={classNamesInput}
-            />
+          <CartProvider value={{ userCart, setUserCart }}>
+            <div className="header w-100">
+              <Header
+                onHandleChangeInput={onHandleChangeInput}
+                handleClickCart={handleClickCart}
+                setActiveInput={setActiveInput}
+                classNameSearchWrapper={classNameSearchWrapper}
+                classNameCart={classNameCart}
+                activeSearch={activeSearch}
+                searchItem={searchItem}
+                classNamesInput={classNamesInput}
+                handleClickSearch={handleClickSearch}
+              />
 
-            {/* A <Switch> looks through its children <Route>s and
+              {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-            <Switch>
+              <Switch>
 
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/gioi-thieu">
-                <Introduce />
-              </Route>
-              <Route path="/san-pham">
-                <SanPham />
-              </Route>
-              <Route path="/tin-tuc">
-                <New />
-              </Route>
-              <Route path="/dang-ly-hoc">
-                <Registration />
-              </Route>
-              <Route path="/video">
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route exact path="/gioi-thieu">
+                  <Introduce />
+                </Route>
+                <Route path="/san-pham">
+                  <SanPham />
+                </Route>
+                <Route path="/tin-tuc">
+                  <New />
+                </Route>
+                <Route path="/dang-ly-hoc">
+                  <Registration />
+                </Route>
+                <Route path="/video">
 
-              </Route>
-              <Route path="/lien-he">
-                <Contact />
-              </Route>
-              <Route path="/gio-hang">
-                <Cart />
-              </Route>
+                </Route>
+                <Route path="/lien-he">
+                  <Contact />
+                </Route>
+                <Route path="/gio-hang">
+                  <Cart />
+                </Route>
 
-              <Route exact path="/all-product/:group/:product" component={ProductDetails} />
-              <Route path="/login">
-                <Login  />
-              </Route>
-            </Switch>
-          </div>
+                <Route exact path="/all-product/:group/:product" component={ProductDetails} />
+                <Route path="/login">
+                  <Login />
+                </Route>
+              </Switch>
+            </div>
+          </CartProvider>
         </UserProvider>
       </Router>
 

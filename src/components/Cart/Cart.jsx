@@ -4,7 +4,7 @@ import React from 'react';
 import { Container, Row } from 'reactstrap'
 import Footer from '../Home/Footer/Footer';
 import './Cart.css'
-import Payment from './Payment';
+import BankAccount from './BankAccount';
 import TableReceipt from './Table/TableReceipt';
 function Cart(props) {
   return (
@@ -36,7 +36,7 @@ function Cart(props) {
 
               </div>
               <div className="col-lg-4 col-md-6">
-                <Payment />
+                <BankAccount />
               </div>
               <div className="col-lg-4 col-md-6">
                 <div className='d-flex flex-column h-100 justify-content-space-around '>
@@ -51,7 +51,6 @@ function Cart(props) {
                     <p className="bold mr-3">Tổng thanh toán:</p>
                     <p>4,000,000 VNĐ</p>
                   </div>
-
                   <button className="btn btn-dark">Đặt Hàng</button>
                 </div>
               </div>

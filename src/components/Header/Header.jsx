@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { CartContext } from '../../ContextApi/CartContext';
 
 function Header({
   classNamesInput,
@@ -16,10 +17,12 @@ function Header({
   classNameCart,
   handleClickCart,
   setActiveInput,
-  classNameSearchWrapper
+  classNameSearchWrapper,
+  handleClickSearch
 }) {
   const { userData, setUserData } = useContext(userContext)
-  console.log(userData)
+  const { userCart, setUserCart } = useContext(CartContext)
+  console.log(userCart)
 
   const onClickLogout = () => {
     setUserData({
@@ -28,7 +31,7 @@ function Header({
     })
     localStorage.setItem('auth-token', '');
   }
-      
+
   return (
     <nav id="header">
       <ul className="container wrapper-header d-flex">
@@ -75,33 +78,51 @@ function Header({
 
         </div>
         <div className="d-flex right">
-          <li className="mr-3" onClick={() => setActiveInput(!activeSearch)}>
+          <li className="mr-3" onClick={handleClickSearch}>
             <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fsearch.png?v=1600474376428" alt="search" />
           </li>
           <li>
             <div className="cart">
               <img onClick={handleClickCart} src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fhand-bag.png?v=1600474259484" alt="cart" />
-              <div className={classNameCart}>
-                <h5 className="mb-3 text-center t1">Giỏ Hàng: </h5>
-                <div className="wrapper-cart t1 mt-2">
-                  <div className="t1 d-flex justify-content-center algin-items-center">
-                    <img src="https://thegioidanviet.com/wp-content/uploads/2019/10/dan-guitar-acoustic-nghe-nhan-thuan-dt-03c-1.jpg" alt="img" />
-                    <div>
-                      <p>Guitar Dáng tròn</p>
-                      <p>SL 5 x 2.000.000</p>
+              {
+                userData.user ? <span className="ml-2">({userCart.length})</span> : <div></div>
+              }
+
+              {
+                userData.user ? <div className={classNameCart}>
+
+                  <h5 className="mb-3 text-center t1">Giỏ Hàng: </h5>
+                  <div className="wrapper-cart t1 mt-2">
+                    {
+                      userCart.length ? (userCart.map(ele => (
+                        <div className="t1 d-flex mb-2 justify-content-center algin-items-center">
+                          <img src="https://thegioidanviet.com/wp-content/uploads/2019/10/dan-guitar-acoustic-nghe-nhan-thuan-dt-03c-1.jpg" alt="img" />
+                          <div>
+                            <p className="s12">{ele.idProduct.name}</p>
+                            <p className="s12">SL {ele.amount} x {ele.idProduct.price}</p>
+                          </div>
+                        </div>
+                      ))) : <div>CHua co gi </div>
+                    }
+
+
+                  </div>
+                  <div className="t1 mt-2 text-center">
+                    TỔNG <strong className="t1 ">8,000,000.00 đ</strong>
+                  </div>
+                  <div className="t1 text-center">
+                    <a href="/gio-hang" class="text-uppercase text-center btn">Xem giỏ hàng</a>
+                  </div>
+                </div> :
+                  <div className={classNameCart}>
+                    <div className="wrapper-cart must-login d-flex flex-column">
+                      <p>You must login before add something to cart</p>
+                      <a href="http://localhost:3001/login" className="login-btn btn btn-dark cl-white">Login</a>
                     </div>
                   </div>
-                </div>
-                <div className="t1 mt-2 text-center">
-                  TỔNG <strong className="t1 ">8,000,000.00 đ</strong>
-                </div>
-                <div className="t1 text-center">
-                  <a href="/gio-hang" class="text-uppercase text-center btn">Xem giỏ hàng</a>
-                </div>
-              </div>
+              }
 
             </div>
-
           </li>
         </div>
       </ul>

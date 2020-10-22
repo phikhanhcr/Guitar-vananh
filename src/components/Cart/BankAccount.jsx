@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControlLabel, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { useState } from 'react';
 
-function Payment(props) {
+function BankAccount(props) {
   const infoBank = [{
     bank: "Ngân hàng Á Châu - ACB chi nhánh Ô Chợ Dừa - Hà Nội",
     stk: "184038419",
@@ -76,4 +76,4 @@ function Payment(props) {
   );
 }
 
-export default Payment;
+export default BankAccount;
