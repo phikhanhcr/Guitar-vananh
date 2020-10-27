@@ -16,6 +16,7 @@
 .wrapper-details {
   padding: 20px 0px 40px 15px;
   height: 350px;
+  height: auto;
 }
 .details-receipt h3::before {
   content: "";
@@ -27,6 +28,7 @@
   position: absolute;
   top: 0;
   left: -5px;
+  
 } 
 
 .details-receipt div div {
@@ -51,4 +53,13 @@
 }
 .wrapper-payment p {
   transition: all 0.3s;
+}
+.makeStyles-paper-13:focus{
+  border: none;
+  outline-offset: none;
+  outline: none;
+  border-radius: 15px;
+}
+.popup-table {
+  border-radius: 15px;
 }

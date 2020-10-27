@@ -7,7 +7,7 @@ function BankAccount(props) {
     bank: "Ngân hàng Á Châu - ACB chi nhánh Ô Chợ Dừa - Hà Nội",
     stk: "184038419",
     owner: "Trần Văn Anh"
-  },{
+  }, {
     bank: "Vietinbank chi nhánhTây Hà Nội",
     stk: "101004283351",
     owner: "Trần Văn Anh"
@@ -49,13 +49,13 @@ function BankAccount(props) {
               </label>
               <input type="radio" id="BIDV" name="gender" value="BIDV" />
             </div>
-            <div className="d-flex flex-column align-items-center"  onClick={() => setBankInfo(infoBank[1])}>
+            <div className="d-flex flex-column align-items-center" onClick={() => setBankInfo(infoBank[1])}>
               <label for="Viettinbank">
                 <img src="https://lh3.googleusercontent.com/PG5lVPQjA6-rWkuP9f35RJJukVCS6xjaBWEYuLmwV8nwkamh_2dGEP8EsImN4yj_j7o" alt="bidv" />
               </label>
               <input type="radio" id="Viettinbank" name="gender" value="Viettinbank" />
             </div>
-            <div className="d-flex flex-column align-items-center"  onClick={() => setBankInfo(infoBank[2])}>
+            <div className="d-flex flex-column align-items-center" onClick={() => setBankInfo(infoBank[2])}>
               <label for="Vietcombank">
                 <img src="https://genk.mediacdn.vn/thumb_w/640/2017/photo-0-1507879905694.jpg" alt="bidv" />
               </label>

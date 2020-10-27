@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Row } from 'reactstrap';
 import { CartContext } from '../../../ContextApi/CartContext';
 import EachProductReceipt from './EachProduct';
+import Puppop from './Pupop';
 
 function TableReceipt(props) {
   const { userCart, setUserCart } = useContext(CartContext)

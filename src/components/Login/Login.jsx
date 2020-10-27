@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { userContext } from '../../ContextApi/UserContext'
-
+import { store } from 'react-notifications-component';
 import './Login.css'
 function Login(props) {
   const [username, setUsername] = useState("");
@@ -48,6 +48,19 @@ function Login(props) {
         console.log(data)
         setUserData(data)
         localStorage.setItem("auth-token", data.token);
+        store.addNotification({
+          title: "Login successfully!",
+          message: "Have a nice day!",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 2000,
+            onScreen: true
+          }
+        })
       })
       .catch(err => {
         console.log(err)

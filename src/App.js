@@ -20,6 +20,11 @@ import Introduce from './components/Introduce/Introduce';
 import Contact from './components/Contact/Contact';
 import Registration from './components/ResgisterStudent/Registration';
 import { CartProvider, CartConsume } from './ContextApi/CartContext'
+import { scrollScreen } from './Middleware/ScrollScreen';
+import ReactNotification  from 'react-notifications-component'
+import Puppop from './components/Cart/Table/Pupop';
+
+
 function App() {
   const [activeSearch, setActiveInput] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
@@ -56,7 +61,11 @@ function App() {
           const myCart = await Axios.get('http://localhost:3000/api/cart', {
             headers: { 'x-auth-token': token }
           })
-          setUserCart(myCart.data.cart)
+          if (myCart.data) {
+            setUserCart(myCart.data.cart)
+          } else {
+            setUserCart([])
+          }
         }
       }
     }
@@ -90,15 +99,7 @@ function App() {
     fetchData()
   }, [])
 
-  var header;
-  window.addEventListener('scroll', () => {
-    header = document.getElementById('header')
-    if (window.scrollY > 800) {
-      header.classList.add('active')
-    } else {
-      header.classList.remove('active')
-    }
-  })
+  scrollScreen();
 
   let classNamesInput = "search";
   let classNameSearchWrapper = "";
@@ -133,6 +134,7 @@ function App() {
 
   return (
     <div className="App">
+      <ReactNotification />
       <Router>
         <UserProvider value={{ userData, setUserData }}>
           <CartProvider value={{ userCart, setUserCart }}>

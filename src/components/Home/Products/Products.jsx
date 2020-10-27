@@ -1,21 +1,44 @@
 
 import Axios from 'axios';
 import React, { useContext } from 'react';
+import { store } from 'react-notifications-component';
 import { Row } from 'reactstrap';
 import { CartContext } from '../../../ContextApi/CartContext';
 import { userContext } from '../../../ContextApi/UserContext';
+
 import './Product.css'
-function Products({latestItem}) {
+function Products({ latestItem }) {
   const { userCart, setUserCart } = useContext(CartContext)
-  const { userData , setUserData } = useContext(userContext)
+  const { userData } = useContext(userContext)
   const addToCart = item => {
     console.log(item);
-    async function postItem () {
+    async function postItem() {
       await Axios.post('http://localhost:3000/api/cart', {
-        idProduct : item._id, 
-        amount : 1
+        idProduct: item._id,
+        amount: 1
       }, {
         headers: { 'x-auth-token': userData.token }
+      }).then(res => res.data)
+        .then(data => {
+          if (data.outOfStock) {
+            console.log(data.outOfStock)
+            return;
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      store.addNotification({
+        title: "Success!",
+        message: "Bạn đã thêm vào giỏ hàng thành công",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 2000,
+          onScreen: true
+        }
       })
       const myCart = await Axios.get('http://localhost:3000/api/cart', {
         headers: { 'x-auth-token': userData.token }
@@ -23,7 +46,6 @@ function Products({latestItem}) {
       setUserCart(myCart.data.cart)
     }
     postItem();
-    // setUserCart([...userCart , item])
     console.log(userCart)
   }
 
@@ -44,7 +66,7 @@ function Products({latestItem}) {
         </div>
 
         <Row className="product-bwrap">
-        
+
           {
             latestItem.map(ele => (
               <div className="each-product col-lg-3 col-md-6 col-sm-6 p-15 " style={{ marginBottom: 65 }}>
@@ -62,10 +84,10 @@ function Products({latestItem}) {
                   </div>
                   <div className="product-over p-3 text-center">
                     <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="mr-3">
-                      <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fexpand.png?v=1600500234753" alt="expand"/>
+                      <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fexpand.png?v=1600500234753" alt="expand" />
                     </a>
                     <span onClick={() => addToCart(ele)} className="cursor-pointer">
-                      <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fshopping-cart.png?v=1600500241553" alt="cart"/>
+                      <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fshopping-cart.png?v=1600500241553" alt="cart" />
                     </span>
                   </div>
                 </div>

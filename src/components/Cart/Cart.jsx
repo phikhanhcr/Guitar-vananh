@@ -28,8 +28,9 @@ function Cart(props) {
         <Container>
           <TableReceipt />
           <p className="info-book s20 bold text-center w-100 bg-ddd p-3">THÔNG TIN ĐẶT HÀNG</p>
-          <Row>
-            <form className="d-flex">
+
+          <form className="d-flex">
+            <Row>
               <div className="col-lg-4 col-md-6">
 
                 <TextField id="standard-basic" label="Họ tên khách hàng" type="text" required />
@@ -58,8 +59,8 @@ function Cart(props) {
                   <button className="btn btn-dark">Đặt Hàng</button>
                 </div>
               </div>
-            </form>
-          </Row>
+            </Row>
+          </form>
         </Container>
 
       </div>
