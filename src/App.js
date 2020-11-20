@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+
 } from "react-router-dom";
 import SanPham from './components/SanPham/SanPham';
 import ProductDetails from './components/SanPham/ProductDetails/ProductDetails';
@@ -14,7 +14,7 @@ import New from './components/TinTuc/New';
 import Login from './components/Login/Login';
 import Cart from './components/Cart/Cart';
 import Axios from 'axios';
-import { UserConsume, UserProvider } from './ContextApi/UserContext';
+import { UserProvider } from './ContextApi/UserContext';
 import Header from './components/Header/Header';
 import Introduce from './components/Introduce/Introduce';
 import Contact from './components/Contact/Contact';
@@ -23,6 +23,7 @@ import { CartProvider, CartConsume } from './ContextApi/CartContext'
 import { scrollScreen } from './Middleware/ScrollScreen';
 import ReactNotification  from 'react-notifications-component'
 import Puppop from './components/Cart/Table/Pupop';
+import DonDaMua from './components/DonMua/DonDaMua';
 
 
 function App() {
@@ -48,7 +49,6 @@ function App() {
       const tokenRes = await Axios.post('http://localhost:3000/login/isValidToken', null, {
         headers: { 'x-auth-token': token }
       })
-      console.log(tokenRes)
       if (tokenRes.data) {
         const userRes = await Axios.get('http://localhost:3000/login', {
           headers: { 'x-auth-token': token }
@@ -112,12 +112,11 @@ function App() {
   }
   // search
   function searchMethods(x) {
-    console.log(allItems)
-    console.log(x);
+
     const resultSearch = allItems.filter(ele => {
       return ele.name.toLowerCase().indexOf(x.toLowerCase()) !== -1;
     })
-    console.log(resultSearch)
+
     setSearchItem(resultSearch)
   }
   //  search Item
@@ -178,6 +177,9 @@ function App() {
                 </Route>
                 <Route path="/gio-hang">
                   <Cart />
+                </Route>
+                <Route exact path="/don-mua">
+                  <DonDaMua />
                 </Route>
 
                 <Route exact path="/all-product/:group/:product" component={ProductDetails} />

@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext  } from 'react';
 import { Row } from 'reactstrap';
 import { CartContext } from '../../../ContextApi/CartContext';
 import EachProductReceipt from './EachProduct';
-import Puppop from './Pupop';
+
 
 function TableReceipt(props) {
-  const { userCart, setUserCart } = useContext(CartContext)
-  console.log(userCart)
+  const { userCart } = useContext(CartContext)
+  const totalMoney = userCart.reduce((a, b) => {
+    return a + b.amount * b.idProduct.price
+  }, 0)
+
   return (
     <Row className="rowTable">
       <div className="col-lg-9 col-sm-12 ">
@@ -23,8 +26,8 @@ function TableReceipt(props) {
           </thead>
           <tbody>
             {
-              userCart.length && userCart.map(ele => (
-                <EachProductReceipt ele={ele}/>
+              userCart.length && userCart.map((ele, index) => (
+                <EachProductReceipt ele={ele} key={index}/>
               ))
             }
           </tbody>
@@ -36,7 +39,7 @@ function TableReceipt(props) {
           <section className="d-flex flex-column justify-content-space-around">
             <div>
               <p className="bold">Chi phí hàng hóa</p>
-              <p>4000000</p>
+              <p>{totalMoney}</p>
             </div>
             <div>
               <p className="bold">Chi phí vận chuyển</p>
@@ -48,7 +51,7 @@ function TableReceipt(props) {
             </div>
             <div>
               <p className="bold">Thành Tiền</p>
-              <p>4000000</p>
+              <p> {totalMoney} </p>
             </div>
           </section>
         </div>

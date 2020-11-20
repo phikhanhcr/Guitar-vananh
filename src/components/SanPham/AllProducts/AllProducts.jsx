@@ -35,6 +35,7 @@ function AllProducts(props) {
     }
     fetchData()
   }, [])
+  
   // get products follow the given Group link reference
   useEffect(() => {
     async function fetchData() {

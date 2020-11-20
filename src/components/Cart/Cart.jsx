@@ -1,5 +1,5 @@
 
-import { FormControlLabel, Radio, RadioGroup, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import React from 'react';
 import { Container, Row } from 'reactstrap'
 import Footer from '../Home/Footer/Footer';
@@ -10,7 +10,10 @@ import { CartContext } from '../../ContextApi/CartContext';
 import { useContext } from 'react';
 
 function Cart(props) {
-  const { userCart, setUserCart } = useContext(CartContext)
+  const { userCart } = useContext(CartContext)
+  const totalMoney = userCart.reduce((a, b) => {
+    return a + b.amount * b.idProduct.price
+  }, 0)
   return (
     <main className="cart">
       <section className="banner-page">
@@ -47,14 +50,14 @@ function Cart(props) {
                 <div className='d-flex flex-column h-100 justify-content-space-around '>
                   <div className="d-flex">
                     <p className="bold mr-3">Tạm tính:</p>
-                    <span> 4,000,000 VNĐ</span>
+                    <span> {totalMoney}</span>
                   </div>
 
                   <p>Phí giao hàng: Phí ship sẽ được tính tùy theo địa chỉ của khách hàng. (Nếu quý khách yêu cầu
                   đặt theo COMBO thì nhắn vào phần ghi chú cho shop biết nhé) VNĐ</p>
                   <div className="d-flex">
                     <p className="bold mr-3">Tổng thanh toán:</p>
-                    <p>4,000,000 VNĐ</p>
+                    <p>{totalMoney}</p>
                   </div>
                   <button className="btn btn-dark">Đặt Hàng</button>
                 </div>

@@ -13,7 +13,7 @@ function Login(props) {
   const [userCheck, setUserCheck] = useState("cl-red display")
   const [passCheck, setPassCheck] = useState("cl-red display")
   const [successfulLogin, setSuccessfulLogin] = useState(false)
-  const { userData, setUserData } = useContext(userContext)
+  const { setUserData } = useContext(userContext)
   const token = localStorage.getItem('auth-token');
   if (token) {
     return <Redirect to="/" />
@@ -35,17 +35,14 @@ function Login(props) {
     }).then(res => res.data)
       .then(data => {
         if (data.emailNotFound) {
-          console.log(data.emailNotFound)
           setUserCheck('cl-red')
           return;
         }
         if (data.wrongPass) {
-          console.log(data.wrongPass)
           setPassCheck('cl-red')
           return;
         }
         setSuccessfulLogin(true)
-        console.log(data)
         setUserData(data)
         localStorage.setItem("auth-token", data.token);
         store.addNotification({

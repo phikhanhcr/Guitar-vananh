@@ -1,0 +1,23 @@
+.purchase-list-page__tab {
+  padding : 1rem;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.purchase-list-page__tab:hover {
+    color: #ee4d2d;
+    cursor: pointer;
+}
+.img-list-purchase {
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-clip: unset;
+  
+}
+.each-item_list {
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
+}

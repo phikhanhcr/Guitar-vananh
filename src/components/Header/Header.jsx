@@ -22,7 +22,6 @@ function Header({
 }) {
   const { userData, setUserData } = useContext(userContext)
   const { userCart, setUserCart } = useContext(CartContext)
-  console.log(userCart)
 
   const onClickLogout = () => {
     setUserData({
@@ -94,8 +93,8 @@ function Header({
                   <h5 className="mb-3 text-center t1">Giỏ Hàng: </h5>
                   <div className="wrapper-cart t1 mt-2">
                     {
-                      userCart.length ? (userCart.map(ele => (
-                        <div className="t1 d-flex mb-2 justify-content-center algin-items-center">
+                      userCart.length ? (userCart.map((ele, index) => (
+                        <div key={index} className="t1 d-flex mb-2 justify-content-center algin-items-center">
                           <img src="https://thegioidanviet.com/wp-content/uploads/2019/10/dan-guitar-acoustic-nghe-nhan-thuan-dt-03c-1.jpg" alt="img" />
                           <div>
                             <p className="s12">{ele.idProduct.name}</p>
@@ -111,7 +110,7 @@ function Header({
                     TỔNG <strong className="t1 ">8,000,000.00 đ</strong>
                   </div>
                   <div className="t1 text-center">
-                    <a href="/gio-hang" class="text-uppercase text-center btn">Xem giỏ hàng</a>
+                    <a href="/gio-hang" className="text-uppercase text-center btn">Xem giỏ hàng</a>
                   </div>
                 </div> :
                   <div className={classNameCart}>
@@ -137,8 +136,8 @@ function Header({
         </div>
         <div className={classNameSearchWrapper}>
           {
-            searchItem.length ? searchItem.slice(0, 8).map(ele => (
-              <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1 wrapper-search p-2">
+            searchItem.length ? searchItem.slice(0, 8).map((ele, index) => (
+              <a key={index} href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1 wrapper-search p-2">
                 <div className="p-1 d-flex justify-content-left align-items-center">
                   <img alt="img" className="mr-2" src={ele.img} />
                   <p className="p-0 m-0 s18">{ele.name}</p>

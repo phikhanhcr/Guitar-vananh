@@ -24,22 +24,39 @@ function Products({ latestItem }) {
             console.log(data.outOfStock)
             return;
           }
+          if (data.invalidToken) {
+            store.addNotification({
+              title: "Fail!",
+              message: "You must login before adding something to cart",
+              type: "warning",
+              insert: "top",
+              container: "top-right",
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 2000,
+                onScreen: true
+              }
+            })
+            return;
+          }
+          store.addNotification({
+            title: "Success!",
+            message: "Bạn đã thêm vào giỏ hàng thành công",
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 2000,
+              onScreen: true
+            }
+          })
+
         }).catch(err => {
           console.log(err)
         })
-      store.addNotification({
-        title: "Success!",
-        message: "Bạn đã thêm vào giỏ hàng thành công",
-        type: "success",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 2000,
-          onScreen: true
-        }
-      })
       const myCart = await Axios.get('http://localhost:3000/api/cart', {
         headers: { 'x-auth-token': userData.token }
       })

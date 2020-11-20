@@ -1,8 +1,10 @@
 import React from 'react';
-import { FormControlLabel, Radio, RadioGroup, TextField } from '@material-ui/core';
+import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import { useState } from 'react';
 
+
 function BankAccount(props) {
+
   const infoBank = [{
     bank: "Ngân hàng Á Châu - ACB chi nhánh Ô Chợ Dừa - Hà Nội",
     stk: "184038419",
@@ -44,19 +46,19 @@ function BankAccount(props) {
           <p>Lựa chọn ngân hàng và ghi lại thông tin tài khoản để chuyển khoản</p>
           <div className="wrapper-bank d-flex justify-content-space-around">
             <div className="d-flex flex-column align-items-center" onClick={() => setBankInfo(infoBank[0])}>
-              <label for="BIDV">
+              <label htmlFor="BIDV">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSeZFT8Ggr4onxB7L3nQlgw7uuYSksvxlvSLw&usqp=CAU" alt="bidv" />
               </label>
               <input type="radio" id="BIDV" name="gender" value="BIDV" />
             </div>
             <div className="d-flex flex-column align-items-center" onClick={() => setBankInfo(infoBank[1])}>
-              <label for="Viettinbank">
+              <label htmlFor="Viettinbank">
                 <img src="https://lh3.googleusercontent.com/PG5lVPQjA6-rWkuP9f35RJJukVCS6xjaBWEYuLmwV8nwkamh_2dGEP8EsImN4yj_j7o" alt="bidv" />
               </label>
               <input type="radio" id="Viettinbank" name="gender" value="Viettinbank" />
             </div>
             <div className="d-flex flex-column align-items-center" onClick={() => setBankInfo(infoBank[2])}>
-              <label for="Vietcombank">
+              <label htmlFor="Vietcombank">
                 <img src="https://genk.mediacdn.vn/thumb_w/640/2017/photo-0-1507879905694.jpg" alt="bidv" />
               </label>
               <input type="radio" id="Vietcombank" name="gender" value="Vietcombank" />
