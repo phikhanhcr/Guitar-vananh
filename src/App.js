@@ -22,7 +22,6 @@ import Registration from './components/ResgisterStudent/Registration';
 import { CartProvider, CartConsume } from './ContextApi/CartContext'
 import { scrollScreen } from './Middleware/ScrollScreen';
 import ReactNotification  from 'react-notifications-component'
-import Puppop from './components/Cart/Table/Pupop';
 import DonDaMua from './components/DonMua/DonDaMua';
 
 

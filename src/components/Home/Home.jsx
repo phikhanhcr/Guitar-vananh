@@ -24,9 +24,7 @@ function Home(props) {
         .then(res => res.json())
         .then(data => {
           console.log(data)
-          
           setLatestItem(data.sort((a, b) => a.createAt - b.createAt).slice(0,8));
-
         })
     }
     fetchData()

@@ -3,8 +3,8 @@ import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import { useState } from 'react';
 
 
-function BankAccount(props) {
-
+function BankAccount({ setPayByCash }) {
+  const [methodPaying, setMethodPaying] = useState('face-to-face')
   const infoBank = [{
     bank: "Ngân hàng Á Châu - ACB chi nhánh Ô Chợ Dừa - Hà Nội",
     stk: "184038419",
@@ -18,22 +18,37 @@ function BankAccount(props) {
     stk: "0011004194920",
     owner: "Trần Văn Anh"
   }]
-  const [display, setDisplay] = useState("default-extends-hide");
+  const [display, setDisplay] = useState("default-extends");
   const [displayBank, setDisplayBank] = useState("default-extends-hide");
   const [bankInfo, setBankInfo] = useState(infoBank[0])
 
   const handleOnClickFace = () => {
     setDisplay("default-extends")
     setDisplayBank("default-extends-hide")
+  
   }
   const handleOnClickBank = () => {
     setDisplayBank("default-extends")
     setDisplay("default-extends-hide")
+   
   }
+  const onHandlePaying = (e) => {
+    setMethodPaying(e.target.value)
+    if (e.target.value == "face-to-face") {
+      setPayByCash(true)
+    } else {
+      setPayByCash(false)
+    }
+  }
+
   return (
     <div className="wrapper-payment">
       <p>Phương thức thanh toán</p>
-      <RadioGroup aria-label="methods" name="methods1" >
+      <RadioGroup
+        value={methodPaying}
+        aria-label="methods"
+        onChange={onHandlePaying}
+        name="methods1" >
         <FormControlLabel onClick={handleOnClickFace} value="face-to-face" control={<Radio />} label="Thanh toán trực tiếp" />
         <p className={display}>
           Sau khi quý khách đặt hàng, chúng tôi sẽ liên hệ lại

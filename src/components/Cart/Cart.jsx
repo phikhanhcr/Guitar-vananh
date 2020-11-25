@@ -8,12 +8,47 @@ import BankAccount from './BankAccount';
 import TableReceipt from './Table/TableReceipt';
 import { CartContext } from '../../ContextApi/CartContext';
 import { useContext } from 'react';
+import { useState } from 'react';
+import Axios from 'axios';
+import { userContext } from '../../ContextApi/UserContext';
 
 function Cart(props) {
   const { userCart } = useContext(CartContext)
+  const { userData } = useContext(userContext)
+  console.log(userCart)
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [note, setNote] = useState('');
+  const [payByCash, setPayByCash] = useState(true);
+  const [condition, setCondition] = useState('dang-cho-xac-nhan')
   const totalMoney = userCart.reduce((a, b) => {
     return a + b.amount * b.idProduct.price
   }, 0)
+  const handleSubmitOrder = e => {
+    e.preventDefault();
+    console.log({
+      name, address, email, phone, note, payByCash, userCart
+    })
+    async function postData() {
+      await Axios.post('http://localhost:3000/api/donhang', {
+        name, address, email, phone, note, payByCash,
+        cart : userCart
+      }, {
+        headers: { 'x-auth-token': userData.token }
+      }).then(res => res.data )
+      .then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+    postData();
+    // 1. display a notification when ordering successfully
+    // 2. redirect to /donhang
+    // 3. remove cart
+  }
   return (
     <main className="cart">
       <section className="banner-page">
@@ -32,19 +67,19 @@ function Cart(props) {
           <TableReceipt />
           <p className="info-book s20 bold text-center w-100 bg-ddd p-3">THÔNG TIN ĐẶT HÀNG</p>
 
-          <form className="d-flex">
+          <form className="d-flex" onSubmit={handleSubmitOrder}>
             <Row>
               <div className="col-lg-4 col-md-6">
 
-                <TextField id="standard-basic" label="Họ tên khách hàng" type="text" required />
-                <TextField id="standard-basic" label="Địa chỉ nhận hàng" type="text" required />
-                <TextField id="standard-basic" label="Điện thoại liên hệ" type="text" required />
-                <TextField id="standard-basic" label="Email" type="email" required />
-                <TextField className="mt-4" id="outlined-basic" label="Note: " variant="outlined" type="text" />
+                <TextField value={name} onChange={e => setName(e.target.value)} id="standard-basic" label="Họ tên khách hàng" type="text" required />
+                <TextField value={address} onChange={e => setAddress(e.target.value)} id="standard-basic" label="Địa chỉ nhận hàng" type="text" required />
+                <TextField value={phone} onChange={e => setPhone(e.target.value)} id="standard-basic" label="Điện thoại liên hệ" type="text" required />
+                <TextField value={email} onChange={e => setEmail(e.target.value)} id="standard-basic" label="Email" type="email" required />
+                <TextField value={note} onChange={e => setNote(e.target.value)} className="mt-4" id="outlined-basic" label="Note: " variant="outlined" type="text" />
 
               </div>
               <div className="col-lg-4 col-md-6">
-                <BankAccount />
+                <BankAccount setPayByCash={setPayByCash} />
               </div>
               <div className="col-lg-4 col-md-6">
                 <div className='d-flex flex-column h-100 justify-content-space-around '>
