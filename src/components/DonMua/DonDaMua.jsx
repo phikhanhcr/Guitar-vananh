@@ -1,11 +1,49 @@
 
-import React from 'react';
+import Axios from 'axios';
+import React, { useState } from 'react';
+import { useContext } from 'react';
+import { useEffect } from 'react';
 import { Row, Container } from 'reactstrap';
+import { OrderContext } from '../../ContextApi/OrderContext';
+
 
 import Footer from '../Home/Footer/Footer';
+import Cancelled from './Cancelled';
 import './DonMua.css'
 import EachPurchase from './EachPurchase';
+import Pending from './Pending';
+import Shipping from './Shipping';
 function DonDaMua(props) {
+  const [condition, setCondition] = useState("all-list")
+
+  const { listOrder } = useContext(OrderContext)
+  console.log(listOrder)
+
+  const handleClickAllList = (e) => {
+    setCondition(e.target.getAttribute('about'))
+  }
+  const handleClickPending = (e) => {
+    setCondition(e.target.getAttribute('about'))
+  }
+  const handleClickCancelled = (e) => {
+    setCondition(e.target.getAttribute('about'))
+  }
+  const handleClickShipping = (e) => {
+    setCondition(e.target.getAttribute('about'))
+  }
+  const handleClickDelivered = (e) => {
+    setCondition(e.target.getAttribute('about'))
+  }
+  useEffect(() => {
+    var i, tabContent;
+    tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
+      tabContent[i].style.display = "none";
+    }
+    document.getElementById(condition).style.display = "block";
+
+  }, [condition])
+
   return (
     <main>
       <section className="banner-page">
@@ -22,19 +60,64 @@ function DonDaMua(props) {
       </section>
       {/* don mua shoppe */}
       <Container>
-        <div className="d-flex justify-content-space-around">
-          <div className="purchase-list-page__tab">Tất cả</div>
-          <div className="purchase-list-page__tab">Chờ xác nhận</div>
-          <div className="purchase-list-page__tab">Chờ lấy hàng</div>
-          <div className="purchase-list-page__tab">Đang giao</div>
-          <div className="purchase-list-page__tab">Đã Giao</div>
-          <div className="purchase-list-page__tab">Đã Hủy</div>
+        <div className="bg-ddd d-flex justify-content-space-around">
+          <div onClick={handleClickAllList} about="all-list" className="purchase-list-page__tab">Tất cả</div>
+          <div onClick={handleClickPending} about="pending" className="purchase-list-page__tab">Chờ lấy hàng</div>
+          <div
+            about="shipping"
+            className="purchase-list-page__tab"
+            onClick={handleClickShipping}
+          >
+            Đang giao
+          </div>
+          <div
+            about="delivered"
+            onClick={handleClickDelivered}
+            className="purchase-list-page__tab">
+            Đã Giao
+          </div>
+          <div
+            className="purchase-list-page__tab"
+            about="cancelled"
+            onClick={handleClickCancelled}
+          >Đã Hủy
+            </div>
         </div>
-        <input placeholder="Tìm kiếm theo tên đơn hàng..." />
-        <div className="purchase-list mt-5">
+
+        <div id="all-list" className="purchase-list tab-content mt-5">
+          <p>Tất cả</p>
+          {
+          
+                <EachPurchase  />
+
+              
+          
+          }
+
+        </div>
+
+        <div id="pending" className="purchase-list tab-content mt-5">
+          <p>Đang chờ xác nhận</p>
+          <Pending />
+        </div>
+
+        <div id="shipping" className="purchase-list tab-content mt-5">
+          <p>Đang giao hangf</p>
+          <Shipping />
+
+        </div>
+
+        <div id="delivered" className="purchase-list tab-content mt-5">
+          <p>Đa Nhan</p>
           <EachPurchase />
           <EachPurchase />
-          <EachPurchase />
+        </div>
+        <div id="cancelled" className="purchase-list tab-content mt-5">
+          {
+            listOrder.length && listOrder.map(ele => (
+              <Cancelled ele={ele} />
+            ))
+          }
         </div>
       </Container>
       <Footer />

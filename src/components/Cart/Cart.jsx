@@ -11,11 +11,12 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import Axios from 'axios';
 import { userContext } from '../../ContextApi/UserContext';
+import { store } from 'react-notifications-component';
+import { Redirect } from 'react-router-dom';
 
 function Cart(props) {
   const { userCart } = useContext(CartContext)
   const { userData } = useContext(userContext)
-  console.log(userCart)
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,14 +24,13 @@ function Cart(props) {
   const [note, setNote] = useState('');
   const [payByCash, setPayByCash] = useState(true);
   const [condition, setCondition] = useState('dang-cho-xac-nhan')
+  const [statusOrder , setStatusOrder ] = useState(false);
   const totalMoney = userCart.reduce((a, b) => {
     return a + b.amount * b.idProduct.price
   }, 0)
   const handleSubmitOrder = e => {
     e.preventDefault();
-    console.log({
-      name, address, email, phone, note, payByCash, userCart
-    })
+
     async function postData() {
       await Axios.post('http://localhost:3000/api/donhang', {
         name, address, email, phone, note, payByCash,
@@ -40,14 +40,32 @@ function Cart(props) {
       }).then(res => res.data )
       .then(data => {
         console.log(data)
+        store.addNotification({
+          title: "Order successfully!",
+          message: "You will be redirected to your Order!",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 1800,
+            onScreen: true
+          }
+        })
+        setStatusOrder(true)
       }).catch(err => {
         console.log(err)
       })
     }
     postData();
-    // 1. display a notification when ordering successfully
-    // 2. redirect to /donhang
-    // 3. remove cart
+    // 1. display a notification when ordering successfully : done
+    // 2. redirect to /donhang : done
+    // 3. remove cart : done
+    // 4. Build DonHangPage
+  }
+  if(statusOrder) {
+    return <Redirect to="/"/>
   }
   return (
     <main className="cart">

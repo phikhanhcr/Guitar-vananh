@@ -21,8 +21,9 @@ import Contact from './components/Contact/Contact';
 import Registration from './components/ResgisterStudent/Registration';
 import { CartProvider, CartConsume } from './ContextApi/CartContext'
 import { scrollScreen } from './Middleware/ScrollScreen';
-import ReactNotification  from 'react-notifications-component'
+import ReactNotification from 'react-notifications-component'
 import DonDaMua from './components/DonMua/DonDaMua';
+import { OrderProvider } from './ContextApi/OrderContext';
 
 
 function App() {
@@ -31,12 +32,14 @@ function App() {
   const [searchItem, setSearchItem] = useState([]);
   const [allItems, setAllItems] = useState([]);
   const [cartButton, setCartButton] = useState(false);
+  const [listOrder, setListOrder] = useState([]);
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined
   })
   const [userCart, setUserCart] = useState([])
   // get cat from api 
+
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -65,11 +68,24 @@ function App() {
           } else {
             setUserCart([])
           }
+          fetchDataOrderList(token);
         }
       }
     }
     checkLoggedIn()
   }, [])
+
+  // all order pending, cancelled, shipping
+  async function fetchDataOrderList(token) {
+    await Axios('http://localhost:3000/api/donhang', {
+      headers: { 'x-auth-token': token }
+    }).then(res => res.data)
+      .then(data => {
+        setListOrder(data)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
   const handleClickCart = () => {
     setCartButton(!cartButton);
     setActiveInput(false)
@@ -177,9 +193,12 @@ function App() {
                 <Route path="/gio-hang">
                   <Cart />
                 </Route>
-                <Route exact path="/don-mua">
-                  <DonDaMua />
-                </Route>
+
+                <OrderProvider value={{ listOrder, setListOrder }}>
+                  <Route exact path="/don-mua">
+                    <DonDaMua />
+                  </Route>
+                </OrderProvider>
 
                 <Route exact path="/all-product/:group/:product" component={ProductDetails} />
                 <Route path="/login">
