@@ -59,6 +59,7 @@ function App() {
           token,
           user: userRes.data
         })
+        
         if (userRes.data) {
           const myCart = await Axios.get('http://localhost:3000/api/cart', {
             headers: { 'x-auth-token': token }
@@ -77,10 +78,11 @@ function App() {
 
   // all order pending, cancelled, shipping
   async function fetchDataOrderList(token) {
-    await Axios('http://localhost:3000/api/donhang', {
+    await Axios.get('http://localhost:3000/api/donhang/myOrder', {
       headers: { 'x-auth-token': token }
     }).then(res => res.data)
       .then(data => {
+        console.log(data)
         setListOrder(data)
       }).catch(err => {
         console.log(err)

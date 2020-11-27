@@ -34,7 +34,8 @@ function Cart(props) {
     async function postData() {
       await Axios.post('http://localhost:3000/api/donhang', {
         name, address, email, phone, note, payByCash,
-        cart : userCart
+        cart : userCart, 
+        userId : userData.user._id 
       }, {
         headers: { 'x-auth-token': userData.token }
       }).then(res => res.data )

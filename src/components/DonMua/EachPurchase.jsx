@@ -11,7 +11,7 @@ function EachPurchase(props) {
   const [element, setElement] = useState([]);
   useEffect(() => {
     async function fetchDataOrderList(token) {
-      await Axios('http://localhost:3000/api/donhang', {
+      await Axios.get('http://localhost:3000/api/donhang/myOrder', {
         headers: { 'x-auth-token': token }
       }).then(res => res.data)
         .then(data => {
