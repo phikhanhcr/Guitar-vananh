@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { useEffect } from 'react';
 import { Row, Container } from 'reactstrap';
 import { OrderContext } from '../../ContextApi/OrderContext';
-
+import EmptyList from '../../Images/nothing.png'
 
 import Footer from '../Home/Footer/Footer';
 import Cancelled from './Cancelled';
@@ -15,9 +15,8 @@ import Pending from './Pending';
 import Shipping from './Shipping';
 function DonDaMua(props) {
   const [condition, setCondition] = useState("all-list")
-  
+
   const { listOrder } = useContext(OrderContext)
-  console.log(listOrder)
 
   const handleClickAllList = (e) => {
     setCondition(e.target.getAttribute('about'))
@@ -87,23 +86,37 @@ function DonDaMua(props) {
         <div id="all-list" className="purchase-list tab-content mt-5">
           <p>Tất cả</p>
           {
-          
-                <EachPurchase  />
-
-              
-          
+            <EachPurchase />
           }
 
         </div>
 
         <div id="pending" className="purchase-list tab-content mt-5">
           <p>Đang chờ xác nhận</p>
-          <Pending />
+          {
+            listOrder.length ? listOrder.filter(ele => {
+              return ele.condition === "dang-cho-xac-nhan"
+            }).map(ele => (
+              <Pending ele={ele} />
+            )) : <div>
+                <img src={EmptyList} alt="emptyList" />
+              </div>
+          }
         </div>
 
         <div id="shipping" className="purchase-list tab-content mt-5">
-          <p>Đang giao hangf</p>
-          <Shipping />
+          <p>Đang giao hàng</p>
+          {
+            listOrder.length && listOrder.filter(ele => {
+              return ele.condition === "dang-giao"
+            }).length ? listOrder.filter(ele => {
+              return ele.condition === "dang-giao"
+            }).map(ele => (
+              <Shipping ele={ele} />
+            )) : <div>
+                <img src={EmptyList} alt="emptyList" />
+              </div>
+          }
 
         </div>
 
@@ -114,10 +127,17 @@ function DonDaMua(props) {
         </div>
         <div id="cancelled" className="purchase-list tab-content mt-5">
           {
-            listOrder.length && listOrder.map(ele => (
+            listOrder.length && listOrder.filter(ele => {
+              return ele.condition === "da-huy"
+            }).length ? listOrder.filter(ele => {
+              return ele.condition === "da-huy"
+            }).map(ele => (
               <Cancelled ele={ele} />
-            ))
+            )) : <div>
+                <img src={EmptyList} alt="emptyList" />
+              </div>
           }
+
         </div>
       </Container>
       <Footer />

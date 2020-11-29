@@ -2,6 +2,7 @@ import React from 'react';
 
 function Cancelled({ele}) {
   return (
+
     <div className="each-item_list">
       <div className="d-flex justify-content-space-between">
         <h5>Đàn Guitar</h5>

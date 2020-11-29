@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { userContext } from '../../ContextApi/UserContext';
-
+import EmptyList from '../../Images/nothing.png'
 
 function EachPurchase(props) {
   const { userData } = useContext(userContext)
@@ -26,12 +26,12 @@ function EachPurchase(props) {
   return (
     <>
       {
-        element.length && element.map(ele => (
+        element.length ? element.map(ele => (
 
           <div className="each-item_list">
             <div className="d-flex justify-content-space-between">
-              <h5>Đàn Guitar</h5>
-              <p className="cl-f26522">Đã Giao</p>
+              <h5>{ele.cart.idProduct.groupInstrument.catalog.name}</h5>
+              <p className="cl-f26522">{ele.condition}</p>
             </div>
             <div className="d-flex justify-content-space-between p-2">
               <div className="d-flex">
@@ -61,7 +61,9 @@ function EachPurchase(props) {
               </div>
             </div>
           </div>
-        ))
+        )) : <div>
+          <img src={EmptyList} alt="emptyList"/>
+        </div>
       }
     </>
   );
