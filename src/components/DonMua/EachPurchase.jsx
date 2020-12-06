@@ -62,8 +62,8 @@ function EachPurchase(props) {
             </div>
           </div>
         )) : <div>
-          <img src={EmptyList} alt="emptyList"/>
-        </div>
+            <img src={EmptyList} alt="emptyList" />
+          </div>
       }
     </>
   );
