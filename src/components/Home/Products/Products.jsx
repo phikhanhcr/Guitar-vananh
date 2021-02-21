@@ -55,7 +55,7 @@ function Products({ latestItem }) {
           }
           store.addNotification({
             title: "Success!",
-            message: "Bạn đã thêm vào giỏ hàng thành công",
+            message: "Adding successfully",
             type: "success",
             insert: "top",
             container: "top-right",
@@ -106,14 +106,14 @@ function Products({ latestItem }) {
                   </div>
                   <div className="item-info">
                     <h2 className="s15 bold">
-                      <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1">
+                      <a href={`/product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1">
                         {ele.name}
                       </a>
                     </h2>
                     <h3 className="s20">{ele.price}</h3>
                   </div>
                   <div className="product-over p-3 text-center">
-                    <a href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="mr-3">
+                    <a href={`/product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="mr-3">
                       <img src="https://cdn.glitch.com/10c9d348-7ac9-4866-a5e9-597207407019%2Fexpand.png?v=1600500234753" alt="expand" />
                     </a>
                     <span onClick={() => addToCart(ele)} className="cursor-pointer">

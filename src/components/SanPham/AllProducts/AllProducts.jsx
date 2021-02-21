@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Row } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './AllProducts.css'
 import Option from './Option';
 import BannerProduct from './BannerProduct';
-import PaginationComponents from './Pagination'
 
 import EachProduct from './EachProduct';
 import Pagination from 'react-js-pagination'
@@ -20,10 +18,10 @@ function AllProducts(props) {
   const [optionSorting, setOptionSorting] = useState('price');
   const [ascendingChecking, setAscendingChecking] = useState(true);
   const [linkRefGroup, setLinkRefGroup] = useState('');
-
+  console.log("Hello world")
   useEffect(() => {
     async function fetchData() {
-      await fetch('http://localhost:3000/api/catalogs')
+      await fetch('/api/catalogs')
         .then(res => res.json())
         .then(data => {
           setCatalogs(data)
@@ -39,14 +37,13 @@ function AllProducts(props) {
   // get products follow the given Group link reference
   useEffect(() => {
     async function fetchData() {
-      await fetch(`http://localhost:3000/api/all-product/${linkRefGroup}`, {
+      await fetch(`/api/all-product/${linkRefGroup}`, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           setProducts(data)
           setLoading(false)
         }).catch(err => {
@@ -56,12 +53,13 @@ function AllProducts(props) {
     fetchData()
   }, [linkRefGroup])
 
-  // TRADITIONALLY PAGINATION
+  
 
-  // tim index cai dau va cuoi ()
+  // find first element's index and last element's index ()
   const indexOfLastPro = currentPage * productPerPage; // 9
   const indexOfFirstPro = indexOfLastPro - productPerPage; // 0
   const currentProducts = products.slice(indexOfFirstPro, indexOfLastPro)
+  console.log(currentProducts)
 
 
   const handlePageChange = function (pageNumber) {
@@ -124,7 +122,6 @@ function AllProducts(props) {
                   <EachProduct product={ele} />
                 ))
               }
-
             </Row>
           </div>
           <div>

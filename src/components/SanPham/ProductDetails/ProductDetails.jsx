@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Row, Container } from 'reactstrap';
@@ -6,10 +5,12 @@ import Footer from '../../Home/Footer/Footer';
 import './ProductDetails.css'
 
 function ProductDetails({ match }) {
+  console.log("hello world")
+  // /api/all-product/dan-guitar-acoustic/dan-guitar-acoustic-d950-2018
   const src = "https://thegioidanviet.com/wp-content/uploads/2019/10/dan-guitar-acoustic-nghe-nhan-thuan-dt-03c-1.jpg"
   const [displayDetails, setDisplayDetails] = useState(false)
   const [item, setItem] = useState({})
-  const [backgroundImages, setBackgroundImages] = useState(`url(${src})`)
+  const backgroundImages = `url(${src})`
   const [backgroundPosition, setBackgroundPosition] = useState('0% 0%')
   const [groupInstrument, setGroupInstrument ] = useState('')
   const handleClickDetails = () => {
@@ -24,7 +25,8 @@ function ProductDetails({ match }) {
   }
   useEffect(() => {
     async function fetchData() {
-      await fetch(`http://localhost:3000/api/all-product/${match.params.group}/${match.params.product}`)
+      
+      await fetch(`/api/all-product/${match.params.group}/${match.params.product}`)
         .then(res => res.json())
         .then(data => {
           console.log(data[0].groupInstrument)
@@ -60,8 +62,6 @@ function ProductDetails({ match }) {
               <figure className="hover-img-wrap" onMouseMove={handleMouseMove} style={{ backgroundImage: backgroundImages, backgroundPosition: backgroundPosition }} >
                 <img alt="item" width="400" height="auto" src={item.img} />
               </figure>
-
-
             </div>
             <div className="col-lg-6 col-sm-12">
               <h3 className="s20">{item.name}</h3>

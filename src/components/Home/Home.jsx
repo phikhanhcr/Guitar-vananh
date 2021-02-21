@@ -23,7 +23,6 @@ function Home(props) {
       await fetch('http://localhost:3000/api/all-product')
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           setLatestItem(data.sort((a, b) => a.createAt - b.createAt).slice(0,8));
         })
     }

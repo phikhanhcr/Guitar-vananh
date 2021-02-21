@@ -122,8 +122,9 @@ function DonDaMua(props) {
 
         <div id="delivered" className="purchase-list tab-content mt-5">
           <p>Đa Nhan</p>
-          <EachPurchase />
-          <EachPurchase />
+          <div>
+                <img src={EmptyList} alt="emptyList" />
+              </div>
         </div>
         <div id="cancelled" className="purchase-list tab-content mt-5">
           {

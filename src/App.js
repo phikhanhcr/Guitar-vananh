@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Home from './components/Home/Home';
-import { Container } from 'reactstrap';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,7 +8,6 @@ import {
 
 } from "react-router-dom";
 import SanPham from './components/SanPham/SanPham';
-import ProductDetails from './components/SanPham/ProductDetails/ProductDetails';
 import New from './components/TinTuc/New';
 import Login from './components/Login/Login';
 import Cart from './components/Cart/Cart';
@@ -19,12 +17,12 @@ import Header from './components/Header/Header';
 import Introduce from './components/Introduce/Introduce';
 import Contact from './components/Contact/Contact';
 import Registration from './components/ResgisterStudent/Registration';
-import { CartProvider, CartConsume } from './ContextApi/CartContext'
+import { CartProvider } from './ContextApi/CartContext'
 import { scrollScreen } from './Middleware/ScrollScreen';
 import ReactNotification from 'react-notifications-component'
 import DonDaMua from './components/DonMua/DonDaMua';
 import { OrderProvider } from './ContextApi/OrderContext';
-
+import ProductDetails from './components/SanPham/ProductDetails/ProductDetails'
 
 function App() {
   const [activeSearch, setActiveInput] = useState(false);
@@ -82,7 +80,6 @@ function App() {
       headers: { 'x-auth-token': token }
     }).then(res => res.data)
       .then(data => {
-        console.log(data)
         setListOrder(data)
       }).catch(err => {
         console.log(err)
@@ -105,9 +102,10 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      await fetch('http://localhost:3000/api/all-product')
+      await fetch('/api/all-product')
         .then(res => res.json())
         .then(data => {
+          console.log(data)
           setAllItems(data);
         }).catch(err => {
           console.log(err);
@@ -133,7 +131,7 @@ function App() {
     const resultSearch = allItems.filter(ele => {
       return ele.name.toLowerCase().indexOf(x.toLowerCase()) !== -1;
     })
-
+    
     setSearchItem(resultSearch)
   }
   //  search Item
@@ -177,7 +175,7 @@ function App() {
                 <Route exact path="/gioi-thieu">
                   <Introduce />
                 </Route>
-                <Route path="/san-pham">
+                <Route exact path="/san-pham">
                   <SanPham />
                 </Route>
                 <Route path="/tin-tuc">
@@ -202,7 +200,7 @@ function App() {
                   </Route>
                 </OrderProvider>
 
-                <Route exact path="/all-product/:group/:product" component={ProductDetails} />
+                <Route exact path="/product/:group/:product" component={ProductDetails} />
                 <Route path="/login">
                   <Login />
                 </Route>

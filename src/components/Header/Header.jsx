@@ -110,13 +110,14 @@ function Header({
                     TỔNG <strong className="t1 ">8,000,000.00 đ</strong>
                   </div>
                   <div className="t1 text-center">
-                    <a href="/gio-hang" className="text-uppercase text-center btn">Xem giỏ hàng</a>
+                    <a href="/gio-hang" className="text-uppercase p1 text-center btn">Xem giỏ hàng</a>
+                    <a href="/don-mua" className="text-uppercase p1 text-center btn">Đơn mua của bạn</a>
                   </div>
                 </div> :
                   <div className={classNameCart}>
                     <div className="wrapper-cart must-login d-flex flex-column">
                       <p>You must login before add something to cart</p>
-                      <a href="http://localhost:3001/login" className="login-btn btn btn-dark cl-white">Login</a>
+                      <a href="/login" className="login-btn btn btn-dark cl-white">Login</a>
                     </div>
                   </div>
               }
@@ -137,7 +138,7 @@ function Header({
         <div className={classNameSearchWrapper}>
           {
             searchItem.length ? searchItem.slice(0, 8).map((ele, index) => (
-              <a key={index} href={`/all-product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1 wrapper-search p-2">
+              <a key={index} href={`/product/${ele.groupInstrument.linkRef}/${ele.linkRef}`} className="t1 wrapper-search p-2">
                 <div className="p-1 d-flex justify-content-left align-items-center">
                   <img alt="img" className="mr-2" src={ele.img} />
                   <p className="p-0 m-0 s18">{ele.name}</p>

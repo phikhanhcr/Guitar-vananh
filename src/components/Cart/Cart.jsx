@@ -23,7 +23,6 @@ function Cart(props) {
   const [email, setEmail] = useState('');
   const [note, setNote] = useState('');
   const [payByCash, setPayByCash] = useState(true);
-  const [condition, setCondition] = useState('dang-cho-xac-nhan')
   const [statusOrder , setStatusOrder ] = useState(false);
   const totalMoney = userCart.reduce((a, b) => {
     return a + b.amount * b.idProduct.price
